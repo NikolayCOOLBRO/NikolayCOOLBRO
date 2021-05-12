@@ -70,14 +70,4 @@ public struct Cell
         Pref = null;
         numberNeighbors = 0;
     }
-
-    public static bool operator ==(Cell cell1, Cell cell2)
-    {
-        return cell1.X == cell2.X && cell1.Y == cell2.Y;
-    }
-
-    public static bool operator !=(Cell cell1, Cell cell2)
-    {
-        return cell1.X != cell2.X && cell1.Y != cell2.Y;
-    }
 }

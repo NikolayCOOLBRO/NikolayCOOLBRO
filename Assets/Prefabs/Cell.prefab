@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6026884990566183018}
   - component: {fileID: 8292670261469459397}
   - component: {fileID: 6621609268099547773}
-  - component: {fileID: 3644252864385526304}
   m_Layer: 0
   m_Name: Area
   m_TagString: Untagged
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3644252864385526304
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4151148586047542254}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5458017263090296263
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +92,6 @@ GameObject:
   - component: {fileID: 5445462304312867716}
   - component: {fileID: 8355346100643375334}
   - component: {fileID: 5393961265558828277}
-  - component: {fileID: 2289876431079096701}
   m_Layer: 0
   m_Name: GX
   m_TagString: Untagged
@@ -177,19 +162,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2289876431079096701
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5458017263090296263}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6190154130612721875
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,8 +171,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2130680777008752685}
-  - component: {fileID: 7811591456864995275}
   - component: {fileID: 5806962068981560851}
+  - component: {fileID: 404990817641295967}
   m_Layer: 0
   m_Name: Cell
   m_TagString: Untagged
@@ -224,19 +196,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7811591456864995275
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6190154130612721875}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5806962068981560851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +212,20 @@ MonoBehaviour:
     isEmpety: 0
     MaxX: 0
     MaxY: 0
+    numberNeighbors: 0
     Pref: {fileID: 0}
   AreaObject: {fileID: 4151148586047542254}
   GX: {fileID: 5458017263090296263}
+--- !u!65 &404990817641295967
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6190154130612721875}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1426425, y: 1.1231912, z: 1}
+  m_Center: {x: 0.016209364, y: -0.0064837337, z: 0}

@@ -14,20 +14,25 @@ public class CellObject : MonoBehaviour
         CheckAdjacentCell(ref WorkersArea.cells);
     }
 
+    public void ClearCell()
+    {
+        DeactivateCell(ref WorkersArea.cells);
+    }
+
     private bool N = true, S = true, W = true, E = true, NE = true, NW = true, SE = true, SW = true;//Стороны света как на компасе
 
     private void Awake()
     {
     }
 
-    private void Update()
+    /*private void Update()
     {
-        if (_cellData.isEmpety)
+        if (!_cellData.isEmpety)
         {
             GX.SetActive(false);
         }
         if(WorkersArea.isInit)CheckAdjacentCell(ref WorkersArea.cells);
-    }
+    }*/
 
     private void OnMouseOver()
     {
@@ -44,7 +49,10 @@ public class CellObject : MonoBehaviour
         if (WorkersArea.isInit) return;
         else
         {
-            ActiveCell(ref WorkersArea.cells);
+            //ActiveCell(ref WorkersArea.cells);
+
+            if (_cellData.isEmpety) ActiveCell(ref WorkersArea.cells);
+            else DeactivateCell(ref WorkersArea.cells);
         }
     }
 
@@ -99,7 +107,7 @@ public class CellObject : MonoBehaviour
             numberNeighbors++;
         }
 
-        Debug.Log(numberNeighbors.ToString());
+        Debug.Log(numberNeighbors);
         _cellData.numberNeighbors = numberNeighbors;
         CellHandler.AllCells.Add(this);
     }
@@ -109,6 +117,8 @@ public class CellObject : MonoBehaviour
         _cellData.isEmpety = true;
         _cellData.Pref.SetActive(false);
 
+        GX.SetActive(false);
+
         cells[_cellData.X, _cellData.Y].isEmpety = true;
     }
 
@@ -116,6 +126,8 @@ public class CellObject : MonoBehaviour
     {
         _cellData.isEmpety = false;
         _cellData.Pref.SetActive(true);
+
+        GX.SetActive(true);
 
         cells[_cellData.X, _cellData.Y].isEmpety = false;
     }

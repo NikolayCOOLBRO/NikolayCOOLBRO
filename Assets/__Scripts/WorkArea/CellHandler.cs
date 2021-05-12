@@ -19,7 +19,8 @@ public class CellHandler : MonoBehaviour
 
     private void Update()
     {
-        if(AllCells.Count == countCells)
+        countCells = _workersArea.Width * _workersArea.Heigth;
+        if (AllCells.Count == countCells)
         {
             foreach (var item in AllCells)
             {
