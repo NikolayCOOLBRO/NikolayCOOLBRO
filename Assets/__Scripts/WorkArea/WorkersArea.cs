@@ -6,15 +6,23 @@ using TMPro;
 
 public class WorkersArea : MonoBehaviour
 {
+    /// <summary>
+    /// Ширина поля
+    /// </summary>
     public int Width;
+    /// <summary>
+    /// Высота поля
+    /// </summary>
     public int Heigth;
 
     [SerializeField] private Transform _parent;
     private GameObject _p;
     private Camera _camera;
 
+    private List<GameObject> _allBackgroundCell;
+
     [Header("This UI")]
-    [SerializeField]private Button Button_Play;
+    [SerializeField]private Button Button_Play;//Кнопка OneStep
     [SerializeField]private Button Button_Clear;
     [SerializeField]private Button Button_RestartInit;
     [SerializeField]private TMP_InputField IF_Width;
@@ -29,6 +37,7 @@ public class WorkersArea : MonoBehaviour
 
     private void Awake()
     {
+        _allBackgroundCell = new List<GameObject>();
         isInit = false;
         _camera = Camera.main;
         InitCells();
@@ -41,6 +50,9 @@ public class WorkersArea : MonoBehaviour
         else isInit = true;
     }
 
+    /// <summary>
+    /// Генерирует новое поле и очищает старое
+    /// </summary>
     private void RestartInitCells()
     {
         try
@@ -54,6 +66,26 @@ public class WorkersArea : MonoBehaviour
             Heigth = 10;
         }
 
+        //ограничение на клетки
+        if(Width < 5)
+        {
+            Width = 5;
+        }
+        if (Heigth < 5)
+        {
+            Heigth = 5;
+        }
+        //ограничение для оптимизации и безопасности вашего компьютера
+        if(Width > 50)
+        {
+            Width = 50;
+        }
+        if(Heigth > 50)
+        {
+            Heigth = 50;
+        }
+
+        //Установка параметров для того чтоб поле всегда было в видимости игрока
         int averagesHeigthWidt = (Width + Heigth) / 2;
 
         _camera.orthographicSize = averagesHeigthWidt;
@@ -65,14 +97,22 @@ public class WorkersArea : MonoBehaviour
 
         _camera.transform.position = cameraPos;
 
+        //Чистит клетки
         Button_Clear.onClick.Invoke();
 
         Button_Play.onClick.RemoveAllListeners();
         Button_Clear.onClick.RemoveAllListeners();
+
+        //Удаляет их со сцены
         Destroy(_p.gameObject);
+
+        ClearBackground();
         InitCells();
     }
 
+    /// <summary>
+    /// Инициализация всех клеток
+    /// </summary>
     private void InitCells()
     {
         cells = new Cell[Width, Heigth];
@@ -91,8 +131,22 @@ public class WorkersArea : MonoBehaviour
                 Button_Play.onClick.AddListener(cell.Play);
                 Button_Clear.onClick.AddListener(cell.ClearCell);
 
-                Instantiate(background, new Vector3(i,j,1), transform.rotation, transform);
+                GameObject _background = Instantiate(background, new Vector3(i,j,1), transform.rotation, transform);
+                _allBackgroundCell.Add(_background);
             }
         }
+    }
+
+    /// <summary>
+    /// Чистит задний фон
+    /// </summary>
+    private void ClearBackground()
+    {
+        for (int i = 0; i < _allBackgroundCell.Count; i++)
+        {
+            Destroy(_allBackgroundCell[i]);
+        }
+        _allBackgroundCell.Clear();
+        _allBackgroundCell = new List<GameObject>();
     }
 }

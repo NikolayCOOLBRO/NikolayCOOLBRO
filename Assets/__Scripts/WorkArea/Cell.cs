@@ -3,11 +3,24 @@ using UnityEngine;
 [System.Serializable]
 public struct Cell
 {
+    /// <summary>
+    /// Жива ли клетка
+    /// </summary>
     public bool isEmpety;
 
+    /// <summary>
+    /// Допустимое значение по X
+    /// </summary>
     public int MaxX;
+
+    /// <summary>
+    /// Допустимое значение по Y
+    /// </summary>
     public int MaxY;
 
+    /// <summary>
+    /// Кол-во соседних живых клеток
+    /// </summary>
     public int numberNeighbors;
 
     private int _x;
@@ -58,6 +71,9 @@ public struct Cell
         }
     }
 
+    /// <summary>
+    /// Объект для вывода
+    /// </summary>
     public GameObject Pref;
 
     public Cell(int x, int y, int maxX, int maxY)

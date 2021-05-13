@@ -5,34 +5,37 @@ public class CellObject : MonoBehaviour
 {
     [SerializeField]private Cell _cellData;
 
+    //Графические объекты
     [Header("Cell Object")]
-    public GameObject AreaObject;
-    public GameObject GX;
+    public GameObject AreaObject;//область подсветки
+    public GameObject GX;//сама клетка
 
+    private AudioSource _audio;
+
+    /// <summary>
+    /// Запускает проверку конкретной клетки
+    /// </summary>
     public void Play()
     {
         CheckAdjacentCell(ref WorkersArea.cells);
     }
 
+    /// <summary>
+    /// Очищает все клетки 
+    /// </summary>
     public void ClearCell()
     {
         DeactivateCell(ref WorkersArea.cells);
     }
 
+    //Данные параметры были введены для проверки положение конкретной клетки в массиве
+    //(Предотвращает ошибку IndexOf(Array))
     private bool N = true, S = true, W = true, E = true, NE = true, NW = true, SE = true, SW = true;//Стороны света как на компасе
 
     private void Awake()
     {
+        _audio = GetComponent<AudioSource>();
     }
-
-    /*private void Update()
-    {
-        if (!_cellData.isEmpety)
-        {
-            GX.SetActive(false);
-        }
-        if(WorkersArea.isInit)CheckAdjacentCell(ref WorkersArea.cells);
-    }*/
 
     private void OnMouseOver()
     {
@@ -51,11 +54,20 @@ public class CellObject : MonoBehaviour
         {
             //ActiveCell(ref WorkersArea.cells);
 
-            if (_cellData.isEmpety) ActiveCell(ref WorkersArea.cells);
+            if (_cellData.isEmpety)
+            {
+                _audio.Play();
+                ActiveCell(ref WorkersArea.cells);
+            }
             else DeactivateCell(ref WorkersArea.cells);
         }
     }
 
+    /// <summary>
+    /// Инициализацие клетки
+    /// </summary>
+    /// <param name="cell"></param>
+    /// <param name="pref"></param>
     public void SetCellData(Cell cell,GameObject pref)
     {
         _cellData = cell;
@@ -69,6 +81,10 @@ public class CellObject : MonoBehaviour
         return _cellData;
     }
 
+    /// <summary>
+    /// Подсчёт соседей
+    /// </summary>
+    /// <param name="cells"></param>
     private void CheckAdjacentCell(ref Cell[,] cells)
     {
         Cell[,] cells1 = cells;
@@ -106,12 +122,14 @@ public class CellObject : MonoBehaviour
         {
             numberNeighbors++;
         }
-
-        Debug.Log(numberNeighbors);
         _cellData.numberNeighbors = numberNeighbors;
         CellHandler.AllCells.Add(this);
     }
 
+    /// <summary>
+    /// Деактивирует клетку
+    /// </summary>
+    /// <param name="cells"></param>
     public void DeactivateCell(ref Cell[,] cells) 
     {
         _cellData.isEmpety = true;
@@ -122,6 +140,10 @@ public class CellObject : MonoBehaviour
         cells[_cellData.X, _cellData.Y].isEmpety = true;
     }
 
+    /// <summary>
+    /// Активирует клетку
+    /// </summary>
+    /// <param name="cells"></param>
     public void ActiveCell(ref Cell[,] cells)
     {
         _cellData.isEmpety = false;
@@ -132,6 +154,10 @@ public class CellObject : MonoBehaviour
         cells[_cellData.X, _cellData.Y].isEmpety = false;
     }
 
+    
+    /// <summary>
+    /// Проверка положения в общем массиве клеток
+    /// </summary>
     private void CheckTheCardinalPoints()
     {
         if(_cellData.X == 0)
