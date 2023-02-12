@@ -2,7 +2,9 @@
 
 <h1 align="center">Hi there, I'm Nikolay 
 <img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/></h1>
-<h3 align="center">I from Russia 🇷🇺</h3>
+<h3 align="center">I from Russia</h3>
+
+[![codewars](https://www.codewars.com/users/coolbrosmoke/badges/large)](https://www.codewars.com/users/coolbrosmoke)
 
 <!--
 **NikolayCOOLBRO/NikolayCOOLBRO** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
